@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
-import { Route, Switch, Link } from 'react-router-dom';
-// import * as todoAPI from '../../services/todos-api';
+import { Route, Switch, Link, NavLink } from 'react-router-dom';
+import * as todoAPI from '../../services/todos-api';
 import TodoListPage from '../../pages/TodoListPage/TodoListPage';
 import AddTodoPage from '../../pages/AddTodoPage/AddTodoPage';
 import TodoDetailPage from '../../pages/TodoDetailPage/TodoDetailPage';
@@ -10,6 +10,7 @@ import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService';
 import NavBar from '../../components/NavBar/NavBar';
+import HomePage from '../HomePage/HomePage';
 
 class App extends Component {
   constructor() {
@@ -22,32 +23,32 @@ class App extends Component {
 
 // -----------*** CHANGE THESE TO FETCH REQUESTS *** ----------------
 
-  // handleAddTodo = async newTodoData => {
-  //       const newTodo = await todoAPI.create(newTodoData);
-  //       this.setState(state => ({
-  //         todos: [...state.todos, newTodo]
-  //       }),
-  //       // Using cb to wait for state to update before rerouting
-  //       () => this.props.history.push('/'));
-  //     }
+  handleAddTodo = async newTodoData => {
+        const newTodo = await todoAPI.create(newTodoData);
+        this.setState(state => ({
+          todos: [...state.todos, newTodo]
+        }),
+        // Using cb to wait for state to update before rerouting
+        () => this.props.history.push('/'));
+      }
     
-  //     handleUpdateTodo = async updatedTodoData => {
-  //       const updatedTodo = await todoAPI.update(updatedTodoData);
-  //       const newTodosArray = this.state.todos.map(t => 
-  //         t._id === updatedTodo._id ? updatedTodo : t
-  //       );
-  //       this.setState(
-  //         {todos: newTodosArray},
-  //         () => this.props.history.push('/')
-  //       );
-  //     }
+      handleUpdateTodo = async updatedTodoData => {
+        const updatedTodo = await todoAPI.update(updatedTodoData);
+        const newTodosArray = this.state.todos.map(t => 
+          t._id === updatedTodo._id ? updatedTodo : t
+        );
+        this.setState(
+          {todos: newTodosArray},
+          () => this.props.history.push('/')
+        );
+      }
     
-  //     handleDeleteTodo= async id => {
-  //       await todoAPI.deleteOne(id);
-  //       this.setState(state => ({
-  //         todos: state.todos.filter(t => t._id !== id)
-  //       }), () => this.props.history.push('/'));
-  //     }
+      handleDeleteTodo= async id => {
+        await todoAPI.deleteOne(id);
+        this.setState(state => ({
+          todos: state.todos.filter(t => t._id !== id)
+        }), () => this.props.history.push('/'));
+      }
 
   handleLogout = () => {
     userService.logout();
@@ -70,28 +71,11 @@ class App extends Component {
       <div>
         <header className="App-header">
     
-          <NavBar />
-            {/* <nav>
-              <NavLink exact to='/'>TO DO LIST</NavLink>
-              &nbsp;&nbsp;&nbsp;
-              <NavLink exact to='/add'>ADD TO DO</NavLink>
-            </nav> */}
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="https://github.com/rmscampos" target="_blank">
-              <img src="https://i.imgur.com/P3oILwq.jpg" width="30" height="30" alt="Selena" />
-            </a>
-            {/* <Link to="/" className="navbar-brand">Regina's To Do App</Link> */}
-            <div className="collapse nav-collapse">
-              <ul className="navbar-nav mr-auto">
-                <li className="navbar-item">
-                  <Link to="/" className="nav-link">To Do List</Link>
-                </li>
-                <li className="navbar-item">
-                  <Link to="/add" className="nav-link">Create Todo</Link>
-                </li>
-              </ul>
-            </div>
-          </nav>
+          <NavBar
+            user={this.state.user}
+            handleLogout={this.handleLogout}
+          />
+   
           </header>
         <Switch>
           <Route exact path='/signup' render={({ history }) => 
@@ -117,6 +101,9 @@ class App extends Component {
               handleAddTodo={this.handleAddTodo}
             />
           } />
+           <Route exact path='/homepage' render={() => 
+            <HomePage/>
+          } />
           <Route exact path='/details' render={({location}) => 
             <TodoDetailPage location={location}/>
           } />
@@ -134,3 +121,28 @@ class App extends Component {
 
 
 export default App;
+
+
+
+
+{/* <nav>
+<NavLink exact to='/'>TO DO LIST</NavLink>
+&nbsp;&nbsp;&nbsp;
+<NavLink exact to='/add'>ADD TO DO</NavLink>
+</nav> 
+<nav className="navbar navbar-expand-lg navbar-light bg-light">
+<Link to="/homepage">
+<img src="https://i.imgur.com/P3oILwq.jpg" width="30" height="30" alt="Selena" />
+</Link>
+
+<div className="collapse nav-collapse">
+<ul className="navbar-nav mr-auto">
+  <li className="navbar-item">
+    <Link to="/" className="nav-link">To Do List</Link>
+  </li>
+  <li className="navbar-item">
+    <Link to="/add" className="nav-link">Create Todo</Link>
+  </li>
+</ul>
+</div>
+</nav> */}

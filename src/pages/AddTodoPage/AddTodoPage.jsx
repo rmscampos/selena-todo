@@ -1,13 +1,19 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import userService from '../../utils/userService';
+
 
 class AddTodoPage extends Component {
   state = {
     invalidForm: true,
     formData: {
-      name: '',
-      breed: 'Mixed',
-      age: '0'
-    }
+      item: '',
+      location: '',
+      priority: '',
+      completed: false
+    },
+    user:userService.getUser(),
+
   };
 
   formRef = React.createRef();
@@ -25,10 +31,14 @@ class AddTodoPage extends Component {
     });
   };
 
+  // handleOnChangeTodoPriority = e => {
+
+  // }
+
   render() {
     return (
-      <>
-        <h1>Add Todo</h1>
+      <div style={{marginTop: 20}}>
+      <h3>Add Todo</h3>
         <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Item Name (required)</label>
@@ -50,24 +60,54 @@ class AddTodoPage extends Component {
               required
             />
           </div>
-          <div className="form-group">
-            <label>Priority</label>
+          <div className="form-check form-check-inline">
             <input
-              className="form-control"
+              className="form-check-input"
               name="priority"
-              value={this.state.formData.priority}
+              id='priorityLow'
+              value='Low'
+              checked={this.state.todo_priority==='Low'}
               onChange={this.handleChange}
-            />
+              // onChange={this.onChangeTodoPriority}
+              />
+              <label className='form-check-label'>Low</label>
           </div>
-          <button
-            type="submit"
-            className="btn"
-            disabled={this.state.invalidForm}
-          >
-            ADD TODO
-          </button>
+          <div className="form-check form-check-inline">
+            <input  className="form-check-input"
+                    type="radio"
+                    name="priorityOptions"
+                    id="priorityMedium"
+                    value="Medium"
+                    checked={this.state.todo_priority==='Medium'}
+                    onChange={this.handleChange}
+                    // onChange={this.onChangeTodoPriority}
+                    />
+            <label className="form-check-label">Medium</label>
+            </div>
+            <div className="form-check form-check-inline">
+                <input  className="form-check-input"
+                        type="radio"
+                        name="priorityOptions"
+                        id="priorityHigh"
+                        value="High"
+                        checked={this.state.todo_priority==='High'}
+                        onChange={this.handleChange}
+                        // onChange={this.onChangeTodoPriority}
+                        />
+                <label className="form-check-label">High</label>
+            </div>
+            <div className="form-group">
+                {this.state.user ? (
+                  <input type="submit" value="Create Todo" className="btn btn-primary" />)
+                : (
+                  <Link to='/signup'>
+                    <button type="submit" className="btn btn-primary">Sign up to save todos</button>
+                  </Link>
+                )
+                }
+            </div>
         </form>
-      </>
+      </div>
     );
   }
 }

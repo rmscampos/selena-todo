@@ -10,8 +10,8 @@ const HomePage = props => {
       <div class="card text-center">
         <div class="card-body">
           <h2 class="card-title">Being Selena</h2>
-          <Link to='/'>
-          <button class="btn btn-primary">Home</button>
+          <Link to='/add'>
+          <button class="btn btn-primary">Create a Todo</button>
           </Link>
 
         </div>
