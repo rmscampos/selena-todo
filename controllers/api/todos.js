@@ -8,6 +8,8 @@ module.exports = {
   update
 };
 
+
+// this needs to use mongoose methods
 async function index(req, res) {
   const todos = await Todo.find({});
   res.status(200).json(todos);
