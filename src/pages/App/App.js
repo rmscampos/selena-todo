@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
 import './App.css';
-import {Route, NavLink} from 'react-router-dom';
+import { Route, Switch, NavLink } from 'react-router-dom';
 // The following imports all named exports attached to todoAPI
 // import * as todoAPI from '../../services/todos-api';
 import TodoListPage from '../../pages/TodoListPage/TodoListPage';
 import AddTodoPage from '../../pages/AddTodoPage/AddTodoPage';
 import TodoDetailPage from '../../pages/TodoDetailPage/TodoDetailPage';
 import EditTodoPage from '../../pages/EditTodoPage/EditTodoPage';
+import SignupPage from '../SignupPage/SignupPage';
+import LoginPage from '../LoginPage/LoginPage';
+import userService from '../../utils/userService';
+
 
 class App extends Component {
   state = {
