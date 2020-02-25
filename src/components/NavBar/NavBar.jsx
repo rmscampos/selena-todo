@@ -5,16 +5,16 @@ import "./NavBar.css";
 const NavBar = props => {
   let nav = props.user ? (
     <div>
-      &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <Link to="/homepage" className="NavBar-link" onClick={props.handleLogout}>
+      <Link to="/" className="NavBar-link" onClick={props.handleLogout}>
         LOG OUT
       </Link>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <Link exact to="/add">
-        ADD TO DO |{" "}
+        ADD TO DO {" "}
       </Link>
+      &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <span className="NavBar-welcome">WELCOME, {props.user.name}</span>
-      <Link to="/homepage">
+      <Link to="/">
         <img
           src="https://i.imgur.com/P3oILwq.jpg"
           width="30"

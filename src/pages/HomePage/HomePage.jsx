@@ -9,11 +9,9 @@ const HomePage = props => {
         <div className="container">
       <div class="card text-center">
         <div class="card-body">
-          <h2 class="card-title">Being Selena</h2>
-          <Link to='/add'>
-          <button class="btn btn-primary">Create a Todo</button>
-          </Link>
-
+          {/* <Link to='/add'>
+          <button class="btn">Create a Todo</button>
+          </Link> */}
         </div>
       </div>
       </div>

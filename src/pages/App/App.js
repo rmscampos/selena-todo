@@ -12,6 +12,7 @@ import userService from '../../utils/userService';
 import NavBar from '../../components/NavBar/NavBar';
 import HomePage from '../HomePage/HomePage';
 
+
 class App extends Component {
   constructor() {
     super();
@@ -90,7 +91,7 @@ class App extends Component {
               handleSignupOrLogin={this.handleSignupOrLogin}
             />
           }/>
-          <Route exact path='/' render={() => 
+          <Route exact path='/list' render={() => 
             <TodoListPage
               todos={this.state.todos}
               handleDeleteTodo={this.handleDeleteTodo}
@@ -101,7 +102,7 @@ class App extends Component {
               handleAddTodo={this.handleAddTodo}
             />
           } />
-           <Route exact path='/homepage' render={() => 
+           <Route exact path='/' render={() => 
             <HomePage/>
           } />
           <Route exact path='/details' render={({location}) => 

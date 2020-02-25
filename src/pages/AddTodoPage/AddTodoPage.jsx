@@ -37,7 +37,7 @@ class AddTodoPage extends Component {
 
   render() {
     return (
-      <div style={{marginTop: 20}}>
+      <div style={{marginTop: 20, textAlign: 'center'}}>
       <h3>Add Todo</h3>
         <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
           <div className="form-group">
@@ -63,6 +63,7 @@ class AddTodoPage extends Component {
           <div className="form-check form-check-inline">
             <input
               className="form-check-input"
+              type="radio"
               name="priority"
               id='priorityLow'
               value='Low'
@@ -98,7 +99,7 @@ class AddTodoPage extends Component {
             </div>
             <div className="form-group">
                 {this.state.user ? (
-                  <input type="submit" value="Create Todo" className="btn btn-primary" />)
+                  <input type="submit" path='/list' value="Create Todo" className="btn btn-primary" />)
                 : (
                   <Link to='/signup'>
                     <button type="submit" className="btn btn-primary">Sign up to save todos</button>
